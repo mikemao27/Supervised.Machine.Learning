@@ -5,3 +5,8 @@ To get logistic regression, we plug $z = \vec{w} \cdot \vec{x} + b$ in for $z$ i
 
 ## Decision Boundary
 $z = \vec{w} \cdot \vec{x} + b = 0$. We can define this to be what we want, typically we have this when $g(z) = f_{\vec{w}, b}(\vec{x}) = 0.5$, but this can be adjusted if we want more certainty.
+
+## Logistic Loss Function
+The typical cost function is not particularly good for logistic regression. Thus, we need to define a new cost function. The loss function for logistic regression is defined as $L(f_{\vec{w}, b}(\vec{x}^{(i)}, y^{(i)})) = \begin{cases} -log(f_{\vec{w}, b}(\vec{x}^{(i)})) & \text{if } y^{(i)} = 1 \\ -log(1 - f_{\vec{w}, b}(\vec{x}^{(i)})) & \text{if } y^{(i)} = 0\end{cases}$. Thus, the cost function for logistic regression then becomes $J(\vec{w}, b) = \frac{1}{m} \sum_{i = 1}^{m} L(f_{\vec{w}, b}(x^{(i)}), y^{(i)})$. It should be noted that the cost function will always be convex. Thus, gradient descent will always lead us to a global minimum. 
+
+If simplified, the loss function becomes $-y^{(i)}log(f_{\vec{w}, b}(\vec{x}^{(i)})) - (1 - y^{(i)})log(1 - f_{\vec{w}, b}(\vec{x}^{(i)}))$.

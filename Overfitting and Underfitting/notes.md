@@ -1,0 +1,10 @@
+## Overfitting and Underfitting
+If a model does not fit the training set well (a linear model for a quadratic curve), then we have a problem of underfitting. If you have a model that fits the training set well and performs well for unseen data, then we have generalization. This is the best case scenario; we are always aiming for generalization. On the other side of the spectrum, if we have a quartic (degree 4 polynomial) for a quadratic curve, our model might fit the training set extremely well. However, we may get a very wiggly curve that doesn't actually fit the general trend of the data correctly. Now, we have overfitting.
+
+## How to Address Overfitting\
+One way to address overfitting is by collecting more data. If you have more training data, then the model will be more aligned with the overall trend of the training data and you won't have overfitting. Another way to address overfitting is to have less features. If we don't have enough training data to accomodate all of the features, picking the features that we think are the most relevant to predicting the outcome instead of all of the features we originally had will help us address overfitting.
+
+One downside to this is that you would lose some of the data. Regularization instead keeps all of the features, but sets some of the weights to extremely small values so that you don't have as much overfitting without losing too much data.
+
+## Regularization
+For regularization, our cost function becomes $J(\vec{w}, b) = \frac{1}{2m}(\sum_{i = 1}^{m}(f_{\vec{w}, b}(\vec{x}^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2m}\sum_{j = 1}^{n}w_j^2 + \frac{\lambda}{2m}b^2)$. $\frac{1}{2m}(\sum_{i = 1}^{m}(f_{\vec{w}, b}(\vec{x}^{(i)}) - y^{(i)})^2)$ is our mean-squared error. $\frac{\lambda}{2m}\sum_{j = 1}^{n}w_j^2$ is called the regularization term. Additionally, the last term $\frac{\lambda}{2m}b^2$ can be ommitted. We want to choose an appropriate $\lambda$. If $\lambda$ is 0, then the model overfits. If $\lambda$ is too large, the model underfits. 

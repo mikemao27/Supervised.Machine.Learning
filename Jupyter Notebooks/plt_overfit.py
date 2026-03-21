@@ -6,7 +6,7 @@ from ipywidgets import Output
 from matplotlib.gridspec import GridSpec
 from matplotlib.widgets import Button, CheckButtons
 from sklearn.linear_model import LogisticRegression, Ridge
-from jupyter_utils_general import np, plt, dlc, predict_logistic, plot_data, zscore_normalize_features
+from jupyter_utils_common import np, plt, dlc, predict_logistic, plot_data, zscore_normalize_features
 
 def map_one_feature(X1, degree):
     """
