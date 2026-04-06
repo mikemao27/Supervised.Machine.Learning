@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use("./deeplearning.mplstyle")
 import tensorflow as tf
-from tensorflow import sigmoid
+from tensorflow.keras.activations import sigmoid
 from matplotlib import cm
 import matplotlib.colors as colors
 from jupyter_utils_common import dlc
