@@ -18,3 +18,22 @@ Lastly, if we have some new input data ```x_new``` and want the model's predicti
 ```model = Sequential([Dense(units=3, activation="sigmoid"), Dense(units=1, activation="sigmoid")])```.
 
 The same process would apply if we have more layers. We'd just insert more layer definitions within ```Sequential```.
+
+## Other Activation Functions
+Before, we had always used the sigmoid function $f(x) = \frac{1}{1 + e^{-x}}$. Another common activation function is the piecewise function $g(z) = max(0, z)$ (0 on the left and g(z) = z on the right). This is the ReLU function (which stands for "rectified linear unit").
+
+The most commonly used activation functions are:
+* The linear activation function: $f(x) = w \cdot x + b$.
+* The sigmoid activation function: $f(x) = \frac{1}{1 + e^{-x}}$.
+* The ReLU activation function: $f(x) = max(0, x)$.
+
+## Choosing Activation Functions
+Depending on the type of target label, y, there will be some fairly natural activation functions we should choose for the output layer.
+
+* If you are performing binary classification, the sigmoid activation function will almost always be the best choice.
+* If you are performing regression where $y$ can be positive or negative, use a linear activation function.
+* If you are performing regression where $y$ can only take on non-negative values, then use the ReLU activation function.
+
+For the hidden layers, the ReLU activation function is by far the most common choice for each of the hidden layers. The machine learning field used to use the sigmoid activation function a while ago, but has now transitioned to use the ReLU activation function much more often.
+* The ReLU activation function is easier to compute since you only need to take the $max()$ of two values.
+* The ReLU activation function only flattens out on the left, unlike the sigmoid activation function which flattens out on both sides. If you are using gradient descent, if you have a function that flattens out in muliple places, then it takes longer to perform gradient descent.

@@ -23,6 +23,6 @@ def sequential(x):
     return f_x
 
 def dense(a_in, W, b, g):
-    Z = np.matmul(a_in, W) + b
+    z = np.matmul(a_in, W) + b
     a_out = g(z)
     return a_out
