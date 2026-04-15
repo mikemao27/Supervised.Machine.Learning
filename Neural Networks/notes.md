@@ -37,3 +37,39 @@ Depending on the type of target label, y, there will be some fairly natural acti
 For the hidden layers, the ReLU activation function is by far the most common choice for each of the hidden layers. The machine learning field used to use the sigmoid activation function a while ago, but has now transitioned to use the ReLU activation function much more often.
 * The ReLU activation function is easier to compute since you only need to take the $max()$ of two values.
 * The ReLU activation function only flattens out on the left, unlike the sigmoid activation function which flattens out on both sides. If you are using gradient descent, if you have a function that flattens out in muliple places, then it takes longer to perform gradient descent.
+
+## The Softmax Regression Algorithm for Multiclass Regression Problems
+Let us say that we have four possible outputs:
+* $z_1 = \vec{w_1} \cdot \vec{x_1} + b_1$.
+* $z_2 = \vec{w_2} \cdot \vec{x_2} + b_2$.
+* $z_3 = \vec{w_3} \cdot \vec{x_3} + b_3$.
+* $z_4 = \vec{w_4} \cdot \vec{x_4} + b_4$.
+
+The softmax regression algorithm says that $a_1 = \frac{e^{z_1}}{e^{z_1} + e^{z_2} + e^{z_3} + e^{z_4}} = P(y = 1 | \vec{x})$, $a_2 = \frac{e^{z_2}}{e^{z_1} + e^{z_2} + e^{z_3} + e^{z_4}} = P(y = 2 | \vec{x})$, $a_3 = \frac{e^{z_3}}{e^{z_1} + e^{z_2} + e^{z_3} + e^{z_4}} = P(y = 3 | \vec{x})$, and $a_4 = \frac{e^{z_4}}{e^{z_1} + e^{z_2} + e^{z_3} + e^{z_4}} = P(y = 4 | \vec{x})$.
+
+In the general case, there may be more possible values. $z_j = \vec{w}_j \cdot \vec{x} + b_j$ for $j = 1, 2,..., N$. $a_j = \frac{e^{z_j}}{\sum_{k = 1}^N e^{z_k}} = P(y = j | \vec{x})$.
+
+The cost function is: $loss(a_1, a_2,..., a_N, y) = \begin{cases} -log(a_1) & \text{ if } y = 1 \\ -log(a_2) & \text{ if } y = 2 \\ & \vdots \\ -log(a_N) & \text{ if } y = N \\ \end{cases}$. 
+
+Before, we only wanted to output 1 unit (either 0 or 1). Now, we may have multiple output units (0, 1, 2, 3,..., 9) since a softmax regression algorithm can have a wide range of output values. So, then we'd change the output layer to have 10 units (now, this depends on how many possible values there are, if there are N classes, then have N units). The activation function will now be the softmax activation function.
+
+# Implementation of Softmax Activation Function
+```
+import tensorflow as tf
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense
+
+model = Sequential([
+    Dense(units=25, activation="relu"), 
+    Dense(units=15, activation="relu"), 
+    Dense(units=10, activation="softmax")
+])
+
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
+model.comple(loss="SparseCategoricalCrossentropy())
+```
+
+This is not the best way to implement softmax algorithms because of numerical roundoff errors. 
+
+## Improved Implementation of Softmax
+Do not use intermediate values. 
