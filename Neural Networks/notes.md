@@ -73,3 +73,23 @@ This is not the best way to implement softmax algorithms because of numerical ro
 
 ## Improved Implementation of Softmax
 Do not use intermediate values. 
+
+## Better Optimization Algorithms
+Besides gradient descent, the "Adam" algorithm may be better in certain scenarios, most often seen when gradient descent won't necessarily work (often shown with concentric rings).
+
+"Adam" stands for "Adaptive Moment Estimation." Instead of a single learning rate, $\alpha$, it uses a different learning rate for each parameter (all $w_i$ and $b$).
+
+```
+model = Sequential([
+    tf.keras.layers.Dense(units=25, activation="sigmoid"),
+    tf.keras.layers.Dense(units=15, activation="sigmoid"),
+    tf.keras.layers.Dense(units=10, activation="linear")
+])
+
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3), loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True))
+
+model.filt(x, y, epoch=100)
+```
+
+## Aditional Layer Types
+* Convolutional Layer: Each neuron only looks at a part of the previous layer's outputs. This makes computation faster. We need less training data, and it makes the model less prone to overfitting.
